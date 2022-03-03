@@ -1,0 +1,41 @@
+@layout('layouts/main')
+@set('title', 'Login Page')
+@section('head')
+    <link rel="stylesheet" href="{{asset('assets/app.css')}}">
+@end
+@section('body')
+
+<div class="container mt-5">
+  <div class="row d-flex justify-content-center">
+      <div class="col-md-6">
+          <form class="card px-5 pt-5" id="form1" method="post" action="{{ route('login') }}">
+            {{ csrfField() }}
+            @if(flashMessages.has('auth.error'))
+            <div class="alert alert-danger">{{ flashMessages.get('auth.error') }}</div>
+            @end
+              <div class="form-data" v-if="!submitted">
+                  <div class="forms-inputs mb-4">
+                    <span>Email</span>
+                    <input name="email" autocomplete="off" type="emaiil" value="{{ flashMessages.get('email', '') }}" class="form-control {{ flashMessages.has('errors.email') ? 'is-invalid' : ''}}">
+                    @if(flashMessages.has('errors.email'))
+                      <div class="invalid-feedback">{{ flashMessages.get('errors.email') }}</div>
+                    @end
+                  </div>
+                  <div class="forms-inputs mb-4">
+                    <span>Password</span>
+                    <input name="password" autocomplete="off" type="password" class="form-control  {{ flashMessages.has('errors.password') ? 'is-invalid' : ''}}">
+                      @if(flashMessages.has('errors.password'))
+                      <div class="invalid-feedback">{{ flashMessages.get('errors.password') }}</div>
+                      @end
+                  </div>
+                  <div class="mb-3">
+                    <button type="submit" class="btn btn-dark w-100">Login</button>
+                    don't have an account? <a href="{{ route('register') }}">Register</a>
+                   </div>
+
+              </div>
+            </form>
+      </div>
+  </div>
+</div>
+@end

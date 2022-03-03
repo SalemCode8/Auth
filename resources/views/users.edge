@@ -1,0 +1,26 @@
+@layout('layouts/main')
+@set('title', 'Users List')
+@section('body')
+<div class="alert alert-success d-flex justify-content-between align-items-center">
+  Welcome Back, {{ capitalCase(auth.user.name) }}!
+  <a href="{{ route('logout') }}" class="btn btn-primary">Logout</a>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    @each(user in users)
+    <tr>
+      <td>{{ user.id }}</td>
+      <td>{{ user.name }}</td>
+      <td>{{ user.email }}</td>
+    </tr>
+    @end
+  </tbody>
+</table>
+@end
